@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rotating Quotes Dashboard</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      transition: background 1s ease;
+    }
+    .quote-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      padding: 20px;
+      max-width: 80%;
+      background: rgba(0,0,0,0.4);
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+    .author {
+      display: block;
+      margin-top: 12px;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quote-container" id="quote"></div>
+
+<script>
+  const quotes = [
+    { text: "Perfection is the enemy of progress.", author: "— Winston Churchill" },
+    { text: "A good plan executed now is better than a perfect plan executed next week.", author: "— General George S. Patton" },
+    { text: "The best decision is the one you make.", author: "— John C. Maxwell" },
+    { text: "Simplicity is the ultimate sophistication.", author: "— Leonardo da Vinci" },
+    { text: "A goal without a timeline is just a dream.", author: "— Harvey Mackay" },
+    { text: "Yesterday is history, tomorrow is a mystery, today is a gift.", author: "— Eleanor Roosevelt" },
+    { text: "The art of being wise is the art of knowing what to overlook.", author: "— William James" }
+  ];
+
+  function setRandomQuote() {
+    const idx = Math.floor(Math.random() * quotes.length);
+    const quote = quotes[idx];
+    document.getElementById("quote").innerHTML =
+      `<div>${quote.text}</div><span class="author">${quote.author}</span>`;
+  }
+
+  function setRandomBackground() {
+    const cacheBuster = new Date().getTime();
+    const url = `https://picsum.photos/1920/1080?random=${cacheBuster}`;
+
+    const img = new Image();
+    img.onload = () => {
+      document.body.style.backgroundImage = `url('${url}')`;
+    };
+    img.src = url;
+  }
+
+  function refreshDashboard() {
+    setRandomQuote();
+    setRandomBackground();
+  }
+
+  // Rotate every 15 seconds
+  setInterval(refreshDashboard, 15000);
+
+  // First load
+  refreshDashboard();
+</script>
+
+</body>
+</html>

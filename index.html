@@ -35,11 +35,29 @@
       font-size: 1.2rem;
       opacity: 0.9;
     }
+    #next-btn {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.4);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #next-btn:hover {
+      background: rgba(0,0,0,0.6);
+    }
   </style>
 </head>
 <body>
 
 <div class="quote-container" id="quote"></div>
+
+<button id="next-btn">Next</button>
 
 <script>
   const quotes = [
@@ -78,7 +96,9 @@
     setRandomBackground();
   }
 
-  // Rotate every 15 seconds
+  document.getElementById("next-btn").addEventListener("click", refreshDashboard);
+
+  // Rotate every 300 seconds (5 minutes)
   setInterval(refreshDashboard, 300000);
 
   // First load
